@@ -1,14 +1,16 @@
-class CreateClassTable < ActiveRecord::Migration[5.0]
+class CreateClassTables < ActiveRecord::Migration[5.0]
   def change
-    
+
     create_table(:ingredients) do |t|
       t.column(:name, :string)
+      t.column(:recipe_id, :integer)
 
       t.timestamps()
     end
 
     create_table(:instructions) do |t|
       t.column(:description, :string)
+      t.column(:recipe_id, :integer)
 
       t.timestamps()
     end
@@ -16,8 +18,6 @@ class CreateClassTable < ActiveRecord::Migration[5.0]
     create_table(:recipes) do |t|
       t.column(:name, :string)
       t.column(:rating, :integer)
-      t.column(:ingredient_id, :integer)
-      t.column(:instruction_id, :integer)
 
       t.timestamps()
     end
@@ -34,5 +34,6 @@ class CreateClassTable < ActiveRecord::Migration[5.0]
 
       t.timestamps()
     end
+
   end
 end
