@@ -1,0 +1,112 @@
+
+<h3>Edit the <%=@recipe.name%> recipe</h3>
+
+<a class="btn btn-primary" href="/" style="display: inline-block">Home</a>
+
+<div style="display: inline-block">
+  <form action="<%=@recipe.id()%>/delete_recipe" method="post">
+    <input name="_method" type="hidden" value="delete">
+    <button class="btn btn-danger" type="submit">Delete <%=@recipe.name()%></button>
+  </form>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-sm-4">
+
+    <h4>Add an ingredient:</h4>
+
+    <form action="<%=@recipe.id()%>/add_ingredients" method="post">
+      <label for="name">Ingredient Name: </label>
+      <input type="text" name="name" id="name">
+      <button class="btn btn-success" type="submit">Add ingredient</button>
+    </form>
+
+    <hr>
+
+    <h4><%=@recipe.name%> Ingredients:</h4>
+
+    <% if @recipe.ingredients.any?() %>
+      <ul>
+        <% @recipe.ingredients.each() do |ingredient| %>
+        <li><%=ingredient.name()%>
+          <form action="/ingredients/<%=ingredient.id()%>/delete" style="display: inline-block" method="post">
+            <input name="_method" type="hidden" value="delete">
+            <button class="btn btn-danger" type="submit">Remove</button>
+          </form>
+        </li>
+        <% end %>
+      </ul>
+
+      <% else %>
+        <p>No ingredients added yet!</p>
+      <% end %>
+
+    </div>
+
+    <div class="col-sm-4">
+
+      <h4>Add an instruction:</h4>
+
+      <form action="<%=@recipe.id()%>/add_instructions" method="post">
+        <label for="description">Instruction description: </label>
+        <input type="text" name="description" id="description">
+        <button class="btn btn-success" type="submit">Add instruction</button>
+      </form>
+
+      <hr>
+
+      <h4><%=@recipe.name%> Instructions:</h4>
+
+      <% if @recipe.instructions.any?() %>
+        <ol>
+          <% @recipe.instructions.each() do |instruction| %>
+          <li><%=instruction.description()%>
+            <form action="/instructions/<%=instruction.id()%>/delete" style="display: inline-block" method="post">
+              <input name="_method" type="hidden" value="delete">
+              <button class="btn btn-danger" type="submit">Remove</button>
+            </form>
+          </li>
+          <% end %>
+        </ol>
+
+        <% else %>
+          <p>No instructions added yet</p>
+        <% end %>
+
+    </div>
+
+    <div class="col-sm-4">
+
+      <h4>Add a category:</h4>
+
+      <form action="<%=@recipe.id()%>/add_categories" method="post">
+        <label for="name">Category name: </label>
+        <input type="text" name="name" id="name">
+        <button class="btn btn-success" type="submit">Add category</button>
+      </form>
+
+      <hr>
+
+      <h4><%=@recipe.name%> Categories:</h4>
+
+      <% if @recipe.categories.any?() %>
+        <ol>
+          <% @recipe.categories.each() do |category| %>
+          <li><%=category.name()%>
+            <form action="/categories/<%=category.id()%>/delete" style="display: inline-block" method="post">
+              <input name="_method" type="hidden" value="delete">
+              <input name="recipe_id" type="hidden" value="<%=@recipe.id%>">
+              <button class="btn btn-danger" type="submit">Remove</button>
+            </form>
+          </li>
+          <% end %>
+        </ol>
+
+        <% else %>
+          <p>No category added yet</p>
+        <% end %>
+
+    </div>
+  </div>

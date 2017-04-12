@@ -1,1 +1,36 @@
-<h1>Index page</h1>
+<h1>Recipe input page </h1>
+
+<div class="container-fluid" style="display: inline-block">
+  <form action="/database_reset" method="post">
+    <input name="_method" type="hidden" value="delete">
+    <button class="btn btn-danger" type="submit">Database Reset</button>
+  </form>
+</div>
+<a href="/web_instruction">Website instruction</a>
+
+
+<hr>
+
+<h4>Add new Recipe:</h4>
+
+<form action="/recipes" method="post">
+  <label for="name">Recipe name:</label>
+  <input type="text" name="name" id="name">
+  <button type="submit">Add Recipe</button>
+</form>
+
+<hr>
+
+<% if @recipes.any? %>
+
+<h4>Edit recipes</h4>
+
+<% @recipes.each() do |recipe|%>
+<li><a href="/recipes/<%=recipe.id()%>"><%= recipe.name() %></a></li>
+<% end %>
+
+<%else%>
+
+<h4>No recipes yet!</h4>
+
+<%end%>
